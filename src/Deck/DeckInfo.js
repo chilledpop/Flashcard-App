@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { deleteDeck, readDeck, deleteCard } from "../utils/api";
+import { deleteDeck, readDeck } from "../utils/api";
 import CardsDisplay from "../Cards/CardsDisplay";
 
 
@@ -27,17 +27,6 @@ function DeckInfo() {
     
     if (userResponse) {
       await deleteDeck(deck.id);
-      history.push(url);
-    }
-  }
-
-  const handleCardDelete = async () => {
-    const userResponse = window.confirm(
-      "Delete this card?\nYou will not be able to recover it."
-    );
-  
-    if (userResponse) {
-      await deleteCard(deck.card.id);
       history.push(url);
     }
   }
@@ -79,7 +68,7 @@ function DeckInfo() {
         </div>
       </div>
       <div>
-        <CardsDisplay deck={deck} handleCardDelete={handleCardDelete}/>
+        <CardsDisplay deck={deck}/>
       </div>
     </div>
   )

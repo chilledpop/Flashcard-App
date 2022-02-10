@@ -13,7 +13,6 @@ import CardEdit from "../Cards/CardEdit";
 
 function Layout() {
 
-  
   return (
     <>
       <Header />
