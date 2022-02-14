@@ -28,23 +28,23 @@ function DeckDisplay({ deck }) {
         </div>
       </div>
       <div className="row">
-        <p class="card-text">{description}</p>
+        <p className="card-text">{description}</p>
       </div>
       <div className="row">
         <Link to="/decks/:deckId">
           <button className="btn btn-secondary">
-            <i class="bi bi-eye-fill"></i>
+            <i className="bi bi-eye-fill"></i>
             View
           </button>
         </Link>
         <Link to="/decks/:deckId/study">
           <button className="btn btn-primary">
-            <i class="bi bi-journal-bookmark-fill"></i>
+            <i className="bi bi-journal-bookmark-fill"></i>
             Study
           </button>
         </Link>
         <button className="btn btn-danger" onClick={handleDelete}>
-          <i class="bi bi-trash"></i>
+          <i className="bi bi-trash"></i>
           Delete
         </button>
       </div>

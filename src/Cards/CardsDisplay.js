@@ -21,7 +21,7 @@ function CardsDisplay({ deck }) {
   return (
     <>
       <h3>Cards</h3> 
-      {deck.map(({ cards: { id, front, back} }) => (
+      {deck.cards.map(({ id, front, back}) => (
         <div className="card">
           <div className="row card-body">
             <p className="col card-text">{front}</p>
@@ -30,12 +30,12 @@ function CardsDisplay({ deck }) {
           <div>
             <Link to={`${url}/${id}/edit`}>
               <button className="btn btn-secondary">
-                <i class="bi bi-pencil-fill"></i>
+                <i className="bi bi-pencil-fill"></i>
                 Edit
               </button>
             </Link>
             <button className="btn btn-danger" onClick={handleCardDelete}>
-              <i class="bi bi-trash"></i>
+              <i className="bi bi-trash"></i>
               Delete
             </button>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { createDeck } from "../utils/api";
+import FormDeck from "../Forms/FormDeck";
 
 function DeckCreate() {  
   const initialFormState = {
@@ -28,39 +29,12 @@ function DeckCreate() {
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-          <li class="breadcrumb-item active" aria-current="page">Create Deck</li>
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+          <li className="breadcrumb-item active" aria-current="page">Create Deck</li>
         </ol>
       </nav>
-      <form onSubmit={handleSubmit}>
-        <h1>Create Deck</h1>
-        <label htmlFor="name">
-          Name
-          <input
-            id="name"
-            type="text"
-            placeholder="Deck Name"
-            name="name"
-            onChange={handleChange}
-            value={formData.name}
-          />
-        </label>
-        <br />
-        <label htmlFor="description">
-          Description
-          <textarea
-            id="description"
-            type="textarea"
-            placeholder="Brief description of the deck"
-            name="description"
-            onChange={handleChange}
-            value={formData.description}
-          />
-        </label>
-        <button className="btn btn-secondary" onClick={() => history.push("/")}>Cancel</button>
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+      <FormDeck handleSubmit={handleSubmit} handleChange={handleChange} formData={formData}/>
     </div>
   )
 }
