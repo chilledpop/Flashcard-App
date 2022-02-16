@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 
 function CardStudy({ cards }) {
   const initialCardState = {
@@ -9,7 +9,7 @@ function CardStudy({ cards }) {
 
   const [session, setSession] = useState(initialCardState);
   const history = useHistory();
-  const { deckId } = useParams();
+  const { deckId }= useParams();
 
   const handleFlip = () => {
     setSession({
@@ -31,6 +31,7 @@ function CardStudy({ cards }) {
       })
     }
   }
+
   if (cards.length > 2) {
     return (
       <div>
@@ -51,12 +52,12 @@ function CardStudy({ cards }) {
           </div>
         </div>
       </div>
-    )
+    );
   } else {
     return (
       <div>
         <h2>Not enough cards</h2>
-        <p>You need at least 3 cards to study. There are 2 cards in this deck.</p>
+        <p>You need at least 3 cards to study. There are {cards.length} cards in this deck.</p>
         <Link to={`/decks/${deckId}/cards/new`}>
           <button className="btn btn-primary">
             <i className="bi bi-plus"></i>
@@ -66,7 +67,6 @@ function CardStudy({ cards }) {
       </div>
     );
   }
-
 }
 
 export default CardStudy;
