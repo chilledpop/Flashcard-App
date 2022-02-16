@@ -3,11 +3,10 @@ import { Link } from "react-router-dom"
 import { listDecks } from "../utils/api";
 import DeckDisplay from "./DeckDisplay";
 
-function Home() {
+function Home({ numberOfDecks, updateDecks }) {
   const [allDecks, setAllDecks] = useState([]);
 
   useEffect(() => {
-    setAllDecks([]);
     const abortController = new AbortController();
 
     async function loadAllDecks() {
@@ -17,7 +16,7 @@ function Home() {
 
     loadAllDecks();
     return () => abortController.abort();
-  }, [allDecks]);
+  }, [numberOfDecks]);
 
   return (
     <div>
@@ -30,7 +29,7 @@ function Home() {
         </Link>
       </div>
       <div>
-        {allDecks.map((deck) => <DeckDisplay deck={deck}/> )}
+        {allDecks.map((deck) => <DeckDisplay key={deck.id} deck={deck} updateDecks={updateDecks}/> )}
       </div>
     </div>
   );

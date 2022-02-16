@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams, Link } from "react-router";
+import { useHistory, useParams, Link } from "react-router-dom";
 
 function CardStudy({ cards }) {
   const initialCardState = {
@@ -45,9 +45,8 @@ function CardStudy({ cards }) {
             <button className="btn btn-secondary" onClick={handleFlip}>
               Flip
             </button>
-            {session.flipped 
-              ? <button className="btn btn-primary" onClick={handleNext}>Next</button>
-              : null
+            {session.flipped && 
+              <button className="btn btn-primary" onClick={handleNext}>Next</button>
             }
           </div>
         </div>

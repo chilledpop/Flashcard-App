@@ -10,14 +10,16 @@ function DeckEdit() {
     description: "",
   }
 
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
   const history = useHistory();
   const { deckId } = useParams;
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     async function loadDeck() {
-      const deckFromAPI = await readDeck(deckId);
+      const deckFromAPI = await readDeck(deckId, abortController.signal);
       setDeck(deckFromAPI);
       setFormData({
         id: deckId,
@@ -27,6 +29,7 @@ function DeckEdit() {
     }
 
     loadDeck();
+    return () => abortController.abort();
   }, [deckId])
 
   const handleChange = ({ target }) => {
@@ -51,6 +54,7 @@ function DeckEdit() {
           <li className="breadcrumb-item active" aria-current="page">Edit Deck</li>
         </ol>
       </nav>
+      <h3>Edit Deck</h3>
       <FormDeck handleChange={handleChange} handleSubmit={handleSubmit} formData={formData}/>
     </div>
   );

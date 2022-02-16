@@ -10,29 +10,31 @@ function CardAdd() {
   }
 
   const { deckId } = useParams();  
-  const [deck, setDeck] = useState(null);
-  const [card, setCard] = useState(initialCardState);
+  const [deck, setDeck] = useState([]);
+  const [newCard, setNewCard] = useState(initialCardState);
 
   useEffect(() => {
+    const abortController = new AbortController();
     async function loadDeck() {
-      const response = await readDeck(deckId);
+      const response = await readDeck(deckId, abortController.signal);
       setDeck(response);
     }
 
     loadDeck();
+    return () => abortController.abort();
   }, [deckId]);
 
   const handleChange = ({ target }) => {
-    setCard({
-      ...card,
+    setNewCard({
+      ...newCard,
       [target.name]: target.value,
     })
   }
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    await createCard(deckId, card);
-    setCard(initialCardState);
+    await createCard(deckId, newCard);
+    setNewCard(initialCardState);
   }
 
   return (
@@ -45,7 +47,7 @@ function CardAdd() {
         </ol>
       </nav>
       <h1>{deck.name}: Add Card</h1>
-      <FormCard handleChange={handleChange} handleSubmit={handleSubmit} card={card}/>
+      <FormCard handleChange={handleChange} handleSubmit={handleSubmit} card={newCard}/>
     </div>
   );
 }

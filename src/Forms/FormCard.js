@@ -2,14 +2,14 @@ import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 
-function FormCard({card, handleSubmit, handleChange }) {
+function FormCard({ card, handleSubmit, handleChange }) {
   const history = useHistory();
   const { deckId } = useParams();
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="front">
-        Front
+      <div className="form-group">
+        <label htmlFor="front">Front</label>
         <textarea
           id="front"
           type="textarea"
@@ -19,10 +19,9 @@ function FormCard({card, handleSubmit, handleChange }) {
           onChange={handleChange}
           value={card.front}
         />
-      </label>
-      <br />
-      <label htmlFor="back">
-        Back
+      </div>
+      <div className="form-group">
+        <label htmlFor="back">Back</label>
         <textarea
           id="back"
           type="textarea"
@@ -32,7 +31,7 @@ function FormCard({card, handleSubmit, handleChange }) {
           onChange={handleChange}
           value={card.back}
         />
-      </label>
+      </div>
       <button className="btn btn-secondary" onClick={() => history.push(`/decks/${deckId}`)}>Done</button>
       <button type="submit" className="btn btn-primary">Save</button>
     </form>

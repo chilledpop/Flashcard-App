@@ -5,18 +5,15 @@ import FormCard from "../Forms/FormCard";
 
 
 function CardEdit() {
-  const initialCardState = {
-    front: "",
-    back: "",
-  }
-  const [deck, setDeck] = useState(null);
-  const [card, setCard] = useState(initialCardState);
+  const [deck, setDeck] = useState([]);
+  const [card, setCard] = useState([]);
   const { deckId, cardId } = useParams();
   const history = useHistory();
   
   useEffect(() => {
+    const abortController = new AbortController();
     async function loadDeckAndCard() {
-      const deckFromAPI = await readDeck(deckId);
+      const deckFromAPI = await readDeck(deckId, abortController.signal);
       setDeck(deckFromAPI);
 
       const cardFromAPI = await readCard(cardId);
@@ -24,6 +21,7 @@ function CardEdit() {
     }
 
     loadDeckAndCard();
+    return () => abortController.abort();
   }, [deckId, cardId])
 
   const handleChange = ({ target }) => {
@@ -38,6 +36,7 @@ function CardEdit() {
     await updateCard(card);
     history.push(`/decks/${deckId}`)
   }
+
   return (
     <div>
       <nav aria-label="breadcrumb">
@@ -48,10 +47,9 @@ function CardEdit() {
         </ol>
       </nav>
       <h1>Edit Card</h1>
-      <FormCard handleChange={handleChange} handleSubmit={handleSubmit} card={card}/>
+      <FormCard handleChange={handleChange} handleSubmit={handleSubmit} card={card} />
     </div>
-  )
-
+  );
 }
 
 

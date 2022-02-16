@@ -7,7 +7,6 @@ function FormDeck({ handleSubmit, handleChange, formData }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Create Deck</h1>
       <label htmlFor="name">
         Name
         <input

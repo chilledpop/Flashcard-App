@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import { useEffect, useParams, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { readDeck } from "../utils/api";
-import CardStudy from "../Cards/CardStudy";
+import CardStudy from "./CardStudy";
 
 
 function DeckStudy() {
   const { deckId } = useParams();
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState([]);
   
   useEffect(() => {
+    const abortController = new AbortController();
     async function loadDeck() {
-      const deckFromAPI = await readDeck(deckId);
+      const deckFromAPI = await readDeck(deckId, abortController.signal);
       setDeck(deckFromAPI);
     }
 
     loadDeck();
+    return () => abortController.abort();
   }, [deckId]);
 
   return (
@@ -29,7 +31,7 @@ function DeckStudy() {
       <h1>Study: {deck.name}</h1>
       <CardStudy cards={deck.cards} />
     </div>
-  )
+  );
 }
 
 

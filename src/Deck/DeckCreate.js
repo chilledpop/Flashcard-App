@@ -21,11 +21,11 @@ function DeckCreate() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormData({ ...initialFormState });
     const response = await createDeck(formData);
+    setFormData({ ...initialFormState });
     history.push(`/decks/${response.id}`);
   }
-
+  
   return (
     <div>
       <nav aria-label="breadcrumb">
@@ -34,9 +34,10 @@ function DeckCreate() {
           <li className="breadcrumb-item active" aria-current="page">Create Deck</li>
         </ol>
       </nav>
+      <h2>Create Deck</h2>
       <FormDeck handleSubmit={handleSubmit} handleChange={handleChange} formData={formData}/>
     </div>
-  )
+  );
 }
 
 export default DeckCreate;
