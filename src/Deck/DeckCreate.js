@@ -9,7 +9,7 @@ function DeckCreate() {
     description: "",
   };
 
-  const [formData, setFormData] = useState({...initialFormState});
+  const [formData, setFormData] = useState(initialFormState);
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -22,7 +22,6 @@ function DeckCreate() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await createDeck(formData);
-    setFormData({ ...initialFormState });
     history.push(`/decks/${response.id}`);
   }
   

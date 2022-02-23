@@ -42,7 +42,7 @@ function DeckInfo({ updateDecks }) {
       <div>
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
-              <li className="breadcrumb-item">Home</li>
+              <li className="breadcrumb-item"><Link to="/">Home</Link></li>
               <li className="breadcrumb-item active" aria-current="page">{deck.name}</li>
           </ol>
         </nav>
@@ -52,24 +52,20 @@ function DeckInfo({ updateDecks }) {
           <div>
             <Link to={`/decks/${deck.id}/edit`}>
               <button className="btn btn-secondary">
-                <i className="bi bi-pencil-fill"></i>
                 Edit
               </button>
             </Link>
             <Link to={`/decks/${deck.id}/study`}>
-              <button>
-                <i className="bi bi-journal-bookmark-fill"></i>
+              <button className="btn btn-primary">
                 Study
               </button>
             </Link>
             <Link to={`/decks/${deck.id}/cards/new`}>
-              <button>
-                <i className="bi bi-plus-lg"></i>
+              <button className="btn btn-primary">
                 Add Card
               </button>
             </Link>
             <button className="btn btn-danger" onClick={handleDeckDelete}>
-              <i className="bi bi-trash"></i>
               Delete
             </button>
           </div>

@@ -32,8 +32,10 @@ function FormDeck({ handleSubmit, handleChange, formData }) {
           value={formData.description}
         />
       </label>
-      <button className="btn btn-secondary" onClick={() => history.goBack()}>Cancel</button>
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <div>
+        <button className="btn btn-secondary" onClick={() => history.push("/")}>Cancel</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </div>
     </form>
   );
 }
