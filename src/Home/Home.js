@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
-import { listDecks } from "../utils/api";
+import { listDecks } from "../utils/api/index";
 import DeckDisplay from "./DeckDisplay";
 
 function Home({ numberOfDecks, updateDecks }) {
@@ -18,19 +18,18 @@ function Home({ numberOfDecks, updateDecks }) {
     return () => abortController.abort();
   }, [numberOfDecks]);
 
+
   return (
     <div>
-      <div>
-        <Link to="/decks/new">
-          <button className="btn btn-secondary">
-            <i className="bi bi-plus-lg"></i>
-            Create Deck
-          </button>
-        </Link>
-      </div>
-      <div>
-        {allDecks.map((deck) => <DeckDisplay key={deck.id} deck={deck} updateDecks={updateDecks}/> )}
-      </div>
+      <Link className="btn btn-secondary btn-lg" to="/decks/new" >
+        + Create Deck
+      </Link> 
+      {allDecks.map(({id, name, description, cards}) => (
+        <DeckDisplay
+          key={id} id={id} description={description} 
+          name={name} cards={cards} updateDecks={updateDecks}
+        />
+      ))}
     </div>
   );
 }

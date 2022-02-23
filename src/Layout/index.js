@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import { Switch, Route } from "react-router-dom";
@@ -15,10 +15,11 @@ function Layout() {
   const [numberOfDecks, setNumberOfDecks] = useState(0);
 
   const updateDecks = (value) => {
-    setNumberOfDecks(numberOfDecks + value)
+    setNumberOfDecks(() => numberOfDecks + value)
   }
+
   return (
-    <>
+    <Fragment>
       <Header />
       <div className="container">
         {/* TODO: Implement the screen starting here */}
@@ -26,14 +27,14 @@ function Layout() {
           <Route exact={true} path="/">
             <Home numberOfDecks={numberOfDecks} updateDecks={updateDecks}/>
           </Route>
-          <Route path="/decks/:deckId/study">
-            <DeckStudy />
-          </Route>
           <Route path="/decks/new">
             <DeckCreate />
           </Route>
           <Route exact={true} path="/decks/:deckId">
             <DeckInfo updateDecks={updateDecks}/>
+          </Route>
+          <Route path="/decks/:deckId/study">
+            <DeckStudy />
           </Route>
           <Route path="/decks/:deckId/edit">
             <DeckEdit />
@@ -49,7 +50,7 @@ function Layout() {
           </Route>
         </Switch>
       </div>
-    </>
+    </Fragment>
   );
 }
 
