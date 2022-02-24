@@ -9,7 +9,7 @@ function CardStudy({ cards }) {
 
   const [session, setSession] = useState(initialCardState);
   const history = useHistory();
-  const { deckId }= useParams();
+  const { deckId } = useParams();
 
   const handleFlip = () => {
     setSession({
@@ -19,7 +19,7 @@ function CardStudy({ cards }) {
   }
 
   const handleNext = () => {
-    if (session.cardNumber >= cards.length) {
+    if (session.cardNumber >= cards.length - 1) {
       window.confirm(`Restart cards?\nClick "cancel" to return to the home page.`)
       ? setSession(initialCardState)
       : history.push("/")
